@@ -1,6 +1,6 @@
---- schedtool-1.0/Makefile.orig	2004-04-06 23:47:53.000000000 +0200
-+++ schedtool-1.0/Makefile	2004-04-21 20:11:43.131205040 +0200
-@@ -1,16 +1,18 @@
+--- schedtool-1.2.4/Makefile.orig	2004-11-28 12:17:27.000000000 +0100
++++ schedtool-1.2.4/Makefile	2004-11-29 23:01:12.434669960 +0100
+@@ -1,10 +1,12 @@
  # go on and adjust here if you don't like those flags
 -CFLAGS=-Os -fomit-frame-pointer -s -pipe
 +CFLAGS=$(OPTFLAGS) -pipe
@@ -16,24 +16,18 @@
  GZIP=gzip -9
  TARGET=schedtool
  DOCS=README INSTALL SCHED_DESIGN TUNING
- RELEASE=$(shell basename `pwd`)
- 
--all: affinity zipman
-+all: affinity
- 
- clean:
- 	rm -f *.o $(TARGET)
-@@ -19,10 +21,10 @@
+@@ -18,11 +20,11 @@
+ distclean: clean unzipman
  	rm -f *~ *.s
  
--install: all install-doc
+-install: all install-doc zipman
 -	install -d $(DESTPREFIX)/$(DESTDIR)
 -	install -c $(TARGET) $(DESTPREFIX)/$(DESTDIR)
 -	install -d $(DESTPREFIX)/man/man8
 -	install -c schedtool.8.gz $(DESTPREFIX)/man/man8
 +install: all
-+	install -d $(DESTDIR)$(BINDIR)
-+	install -c $(TARGET) $(DESTDIR)$(BINDIR)
++	install -d $(DESTDIR)/$(BINDIR)
++	install -c $(TARGET) $(DESTDIR)/$(BINDIR)
 +	install -d $(DESTDIR)$(MANDIR)/man8
 +	install -c schedtool.8 $(DESTDIR)$(MANDIR)/man8
  
