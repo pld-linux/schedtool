@@ -1,13 +1,12 @@
 Summary:	Tool for querying and altering scheduler parameters
 Summary(pl):	Narzêdzie do odpytywania i zmieniania parametrów schedulera
 Name:		schedtool
-Version:	1.2.3
+Version:	1.2.4
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://freequaos.host.sk/schedtool/%{name}-%{version}.tar.bz2
-# Source0-md5:	e7ef9ce990a327aae6bbb051246102d9
-# Source0-size:	24617
+# Source0-md5:	db2c024cdaffecbeefd2535fa6b7a0c4
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://freequaos.host.sk/schedtool/
 # requires new sched_getaffinity prototype
