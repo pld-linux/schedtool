@@ -1,19 +1,21 @@
-diff -aurN schedtool-0.99.orig/Makefile schedtool-0.99/Makefile
---- schedtool-0.99.orig/Makefile	2004-01-28 14:29:10.000000000 +0100
-+++ schedtool-0.99/Makefile	2004-02-21 21:46:43.933656472 +0100
-@@ -1,15 +1,14 @@
+--- schedtool-1.0/Makefile.orig	2004-04-06 23:47:53.000000000 +0200
++++ schedtool-1.0/Makefile	2004-04-21 20:11:43.131205040 +0200
+@@ -1,16 +1,18 @@
  # go on and adjust here if you don't like those flags
 -CFLAGS=-Os -fomit-frame-pointer -s -pipe
-+CFLAGS=$(OPTFLAGS)
- #CFLAGS=-Wall -Os -fomit-frame-pointer -s -pipe -DDEBUG_ME
--CC=gcc
-+#CC=gcc
++CFLAGS=$(OPTFLAGS) -pipe
+ #CFLAGS=-Wall -Os -fomit-frame-pointer -s -pipe -DDEBUG
+ CC=gcc
  # likewise, if you want to change the destination prefix
 -DESTPREFIX=/usr/local
 -DESTDIR=bin
 +PREFIX=/usr
++BINDIR=$(PREFIX)/bin
++MANDIR=$(PREFIX)/share/man
++DESTDIR=
  GZIP=gzip -9
  TARGET=schedtool
+ DOCS=README INSTALL SCHED_DESIGN TUNING
  RELEASE=$(shell basename `pwd`)
  
 -all: affinity zipman
@@ -21,18 +23,19 @@ diff -aurN schedtool-0.99.orig/Makefile schedtool-0.99/Makefile
  
  clean:
  	rm -f *.o $(TARGET)
-@@ -18,10 +17,10 @@
+@@ -19,10 +21,10 @@
  	rm -f *~ *.s
  
- install: all
+-install: all install-doc
 -	install -d $(DESTPREFIX)/$(DESTDIR)
 -	install -c $(TARGET) $(DESTPREFIX)/$(DESTDIR)
 -	install -d $(DESTPREFIX)/man/man8
 -	install -c schedtool.8.gz $(DESTPREFIX)/man/man8
-+	install -d $(DESTDIR)/$(PREFIX)/bin
-+	install -c $(TARGET) $(DESTDIR)/$(PREFIX)/bin
-+	install -d $(DESTDIR)$(PREFIX)/share/man/man8
-+	install -c schedtool.8 $(DESTDIR)$(PREFIX)/share/man/man8
++install: all
++	install -d $(DESTDIR)$(BINDIR)
++	install -c $(TARGET) $(DESTDIR)$(BINDIR)
++	install -d $(DESTDIR)$(MANDIR)/man8
++	install -c schedtool.8 $(DESTDIR)$(MANDIR)/man8
  
- zipman:
- 	test -f schedtool.8 && $(GZIP) schedtool.8 || exit 0
+ install-doc:
+ 	install -d $(DESTPREFIX)/share/doc/schedtool
