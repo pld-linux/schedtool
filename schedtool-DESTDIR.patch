@@ -1,0 +1,38 @@
+diff -aurN schedtool-0.99.orig/Makefile schedtool-0.99/Makefile
+--- schedtool-0.99.orig/Makefile	2004-01-28 14:29:10.000000000 +0100
++++ schedtool-0.99/Makefile	2004-02-21 21:46:43.933656472 +0100
+@@ -1,15 +1,14 @@
+ # go on and adjust here if you don't like those flags
+-CFLAGS=-Os -fomit-frame-pointer -s -pipe
++CFLAGS=$(OPTFLAGS)
+ #CFLAGS=-Wall -Os -fomit-frame-pointer -s -pipe -DDEBUG_ME
+-CC=gcc
++#CC=gcc
+ # likewise, if you want to change the destination prefix
+-DESTPREFIX=/usr/local
+-DESTDIR=bin
++PREFIX=/usr
+ GZIP=gzip -9
+ TARGET=schedtool
+ RELEASE=$(shell basename `pwd`)
+ 
+-all: affinity zipman
++all: affinity
+ 
+ clean:
+ 	rm -f *.o $(TARGET)
+@@ -18,10 +17,10 @@
+ 	rm -f *~ *.s
+ 
+ install: all
+-	install -d $(DESTPREFIX)/$(DESTDIR)
+-	install -c $(TARGET) $(DESTPREFIX)/$(DESTDIR)
+-	install -d $(DESTPREFIX)/man/man8
+-	install -c schedtool.8.gz $(DESTPREFIX)/man/man8
++	install -d $(DESTDIR)/$(PREFIX)/bin
++	install -c $(TARGET) $(DESTDIR)/$(PREFIX)/bin
++	install -d $(DESTDIR)$(PREFIX)/share/man/man8
++	install -c schedtool.8 $(DESTDIR)$(PREFIX)/share/man/man8
+ 
+ zipman:
+ 	test -f schedtool.8 && $(GZIP) schedtool.8 || exit 0
