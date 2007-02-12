@@ -1,5 +1,5 @@
 Summary:	Tool for querying and altering scheduler parameters
-Summary(pl.UTF-8):   Narzędzie do odpytywania i zmieniania parametrów schedulera
+Summary(pl.UTF-8):	Narzędzie do odpytywania i zmieniania parametrów schedulera
 Name:		schedtool
 Version:	1.2.6
 Release:	1
